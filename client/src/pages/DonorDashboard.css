@@ -1,0 +1,233 @@
+.donor-root {
+  min-height: 100vh;
+  background: #f9fafb;
+  padding: 1.5rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.donor-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.donor-header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.donor-subtitle {
+  margin: 0.25rem 0 0;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.donor-summary {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.donor-badge {
+  background: white;
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+}
+
+.donor-badge span {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.donor-badge.secondary {
+  background: #ecfdf3;
+}
+
+.donor-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.donor-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.donor-card h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+}
+
+.donor-hint {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.donor-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.preset-btn {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid #d4d4d8;
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.preset-btn.active {
+  border-color: #16a34a;
+  background: #dcfce7;
+  color: #166534;
+}
+
+.donor-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.donor-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.field {
+  flex: 1 1 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.field label {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.field input,
+.field select {
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.85rem;
+}
+
+.donor-disclaimer {
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+.primary-btn {
+  align-self: flex-start;
+  margin-top: 0.25rem;
+  background: #16a34a;
+  color: white;
+  border-radius: 999px;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.donor-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.donor-count {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.donor-empty {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.donor-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.donor-donation-card {
+  border-radius: 0.8rem;
+  border: 1px solid #e5e7eb;
+  padding: 0.75rem;
+  background: #f9fafb;
+}
+
+.ddc-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.ddc-top h3 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.ddc-meta {
+  margin: 0.1rem 0 0;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.status-pill {
+  font-size: 0.7rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+}
+
+.pill-posted {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.pill-accepted {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.ddc-bottom {
+  margin-top: 0.4rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+.ddc-otp {
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .donor-root {
+    padding: 1rem;
+  }
+  .donor-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .donor-summary {
+    margin-top: 0.5rem;
+  }
+}
