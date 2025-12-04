@@ -61,10 +61,81 @@ const App = () => {
   ];
 
   return (
-    // Outer container: Responsive padding, light gray background, centered content
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8 font-sans transition-colors duration-300">
-      <div className="max-w-4xl mx-auto">
-        {/* HEADER */}
+    // Outer container: Full width, min-height
+    <div className="min-h-screen bg-gray-50 font-sans transition-colors duration-300">
+      {/* Top Bar (FoodBridge Branding) */}
+      <div className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between">
+            {/* Logo & Name */}
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
+                {/* Replaced Lucide Heart with SVG */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="white"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6 text-white"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                  />
+                </svg>
+              </div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                FoodBridge
+              </span>
+            </div>
+
+            {/* Right Side Icons */}
+            <div className="flex items-center space-x-3">
+              <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors relative">
+                {/* Replaced Lucide Bell with SVG */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-5 h-5 text-gray-600"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+                  />
+                </svg>
+                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+              </button>
+              <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                {/* Replaced Lucide User with SVG */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-5 h-5 text-gray-600"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
+        {/* PAGE HEADER */}
         <header className="flex flex-col sm:flex-row justify-between items-start mb-8 gap-4 sm:gap-0">
           <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-1 tracking-tight">
@@ -84,6 +155,7 @@ const App = () => {
                 2
               </strong>
             </div>
+
             {/* Logout Button */}
             <button className="flex items-center gap-2 bg-red-500 px-4 py-2 rounded-full shadow-sm border border-red-500 text-sm font-semibold text-white hover:bg-red-600 hover:border-red-600 hover:shadow-md transition-all duration-300 cursor-pointer">
               <svg
