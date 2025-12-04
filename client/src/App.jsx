@@ -1,12 +1,19 @@
-import React from "react";
-import VolunteerDashboard from "./pages/VolunteerDashboard";
+// src/App.jsx
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from "./pages/LandingPage.jsx";
+import DonorDashboard from "./pages/DonorDashboard.jsx";
+import VolunteerDashboard from "./pages/VolunteerDashboard.jsx";
+import AdminLayout from "./pages/AdminLayout.jsx";
 
-function App() {
+export default function App() {
   return (
-    <div>
-      <VolunteerDashboard />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/donor" element={<DonorDashboard />} />
+        <Route path="/volunteer" element={<VolunteerDashboard />} />
+        <Route path="/admin" element={<AdminLayout />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
