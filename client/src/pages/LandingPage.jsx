@@ -215,6 +215,7 @@ export default function LandingPage() {
         </section>
 
         {/* IMPACT STRIP */}
+        
         <section
           id="impact"
           className="max-w-6xl mx-auto px-4 py-8 grid gap-3 md:grid-cols-2"
@@ -300,7 +301,7 @@ export default function LandingPage() {
         </div>
       </footer>
 
-      {/* ROLE SELECT DIALOG */}
+      {/* ROLE SELECT DIALOG  new */}
       {showRoleDialog && (
         <div className="fixed inset-0 z-30 flex items-center justify-center bg-slate-900/50 px-4">
           <div className="w-full max-w-md rounded-2xl bg-white shadow-2xl border border-slate-200 p-4">
