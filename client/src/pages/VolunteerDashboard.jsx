@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // Helper function to format the 'Best Before' time (simulated data)
 const formatBestBefore = (dateString) => {
@@ -23,6 +23,61 @@ const formatBestBefore = (dateString) => {
 
 // Main App component
 const App = () => {
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  // --- Notification State ---
+  const [notifications, setNotifications] = useState([
+    {
+      id: 1,
+      text: "New donation: 5kg Rice at MG Road",
+      time: "2m ago",
+      unread: true,
+    },
+    {
+      id: 2,
+      text: "Rescue verified: Hotel Sunrise",
+      time: "1h ago",
+      unread: false,
+    },
+    {
+      id: 3,
+      text: "Urgent: Pickup needed nearby",
+      time: "3h ago",
+      unread: true,
+    },
+  ]);
+
+  // Derived state: Count only the unread ones for the badge
+  const unreadCount = notifications.filter((n) => n.unread).length;
+
+  // --- Logic to Handle Bell Click ---
+  const handleBellClick = () => {
+    if (!showNotifications) {
+      // If we are OPENING the dropdown, mark all existing notifications as read
+      // This immediately clears the red dot
+      setNotifications((prev) => prev.map((n) => ({ ...n, unread: false })));
+    }
+    // Toggle the dropdown visibility
+    setShowNotifications(!showNotifications);
+  };
+
+  // --- Simulation: New Notification Arrives ---
+  useEffect(() => {
+    // This timer simulates a new notification arriving after 8 seconds
+    // allowing you to see the red dot reactivate.
+    const timer = setTimeout(() => {
+      const newNotification = {
+        id: Date.now(),
+        text: "New Alert: Food spoiling soon at City Center!",
+        time: "Just now",
+        unread: true, // This will trigger the red dot again
+      };
+      setNotifications((prev) => [newNotification, ...prev]);
+    }, 8000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   // --- Simulated Donation Data ---
   const donations = [
     {
@@ -93,24 +148,71 @@ const App = () => {
 
             {/* Right Side Icons */}
             <div className="flex items-center space-x-3">
-              <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors relative">
-                {/* Replaced Lucide Bell with SVG */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-5 h-5 text-gray-600"
+              {/* Notifications Dropdown Container */}
+              <div className="relative">
+                <button
+                  onClick={handleBellClick}
+                  className="p-2 rounded-lg hover:bg-gray-100 transition-colors relative"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
-                  />
-                </svg>
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-              </button>
+                  {/* Replaced Lucide Bell with SVG */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-5 h-5 text-gray-600"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+                    />
+                  </svg>
+                  {/* Only show Red Dot if there are unread notifications */}
+                  {unreadCount > 0 && (
+                    <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border border-white animate-pulse"></span>
+                  )}
+                </button>
+
+                {/* Dropdown Menu */}
+                {showNotifications && (
+                  <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 transform origin-top-right transition-all">
+                    <div className="px-4 py-2 border-b border-gray-100 flex justify-between items-center">
+                      <span className="font-semibold text-gray-800">
+                        Notifications
+                      </span>
+                      <span className="text-xs text-blue-600 cursor-pointer hover:underline">
+                        Mark all read
+                      </span>
+                    </div>
+                    <div className="max-h-64 overflow-y-auto">
+                      {notifications.map((note) => (
+                        <div
+                          key={note.id}
+                          className={`px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-50 last:border-0 ${
+                            note.unread ? "bg-blue-50/30" : ""
+                          }`}
+                        >
+                          <p
+                            className={`text-sm ${
+                              note.unread
+                                ? "font-semibold text-gray-800"
+                                : "text-gray-600"
+                            }`}
+                          >
+                            {note.text}
+                          </p>
+                          <p className="text-xs text-gray-400 mt-1">
+                            {note.time}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
               <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
                 {/* Replaced Lucide User with SVG */}
                 <svg
