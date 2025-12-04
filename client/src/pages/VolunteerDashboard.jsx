@@ -1,150 +1,136 @@
-// src/pages/VolunteerDashboard.jsx
-import { useState } from "react";
+import React from "react";
 import "./VolunteerDashboard.css";
 
-const MOCK_DONATIONS = [
-  {
-    id: 1,
-    donorName: "Hotel Sunrise",
-    foodType: "Buffet Dinner",
-    quantity: "8 kg",
-    distance: "3.2 km",
-    timeLeft: "1h 20m",
-    address: "MG Road, City Center",
-  },
-  {
-    id: 2,
-    donorName: "Green Leaf Restaurant",
-    foodType: "Veg Lunch",
-    quantity: "5 kg",
-    distance: "1.1 km",
-    timeLeft: "45m",
-    address: "Near City Mall",
-  },
-];
+// Helper function to format the 'Best Before' time (simulated data)
+const formatBestBefore = (dateString) => {
+  // In a real app, you'd use a library like date-fns or Moment.js
+  // This is a simple placeholder to show the time remaining
+  const now = new Date();
+  const bestBefore = new Date(dateString);
+  const diffInMinutes = Math.floor((bestBefore - now) / (1000 * 60));
 
-export default function VolunteerDashboard() {
-  const [radius, setRadius] = useState("5");
-  const [donations, setDonations] = useState(MOCK_DONATIONS);
-  const [selected, setSelected] = useState(null);
+  if (diffInMinutes <= 0) return "EXPIRED";
+  if (diffInMinutes < 60) return `${diffInMinutes}m`;
 
-  const handleAccept = (donation) => {
-    // TODO: backend call for claim
-    setSelected(donation.id);
-    alert(`Accepted donation from ${donation.donorName} (demo only)`);
-  };
+  const hours = Math.floor(diffInMinutes / 60);
+  const minutes = diffInMinutes % 60;
+  return `${hours}h ${minutes}m`;
+};
 
-  const handleNavigate = (donation) => {
-    // TODO: open Google Maps with coordinates
-    alert(`Navigate to: ${donation.address}`);
-  };
+const VolunteerDashboard = () => {
+  // --- Simulated Donation Data based on Schema ---
+  const donations = [
+    {
+      id: 1,
+      restaurantName: "Hotel Sunrise",
+      foodType: "Buffet Dinner",
+      quantity: "8 kg",
+      bestBefore: new Date(Date.now() + 1000 * 60 * 80).toISOString(), // 80 mins from now
+      address: "MG Road, City Center",
+      distance: "3.2 km",
+      imageUrl: "https://via.placeholder.com/60x60?text=Food+1",
+    },
+    {
+      id: 2,
+      restaurantName: "Green Leaf Restaurant",
+      foodType: "Veg Lunch",
+      quantity: "5 kg",
+      bestBefore: new Date(Date.now() + 1000 * 60 * 45).toISOString(), // 45 mins from now
+      address: "Near City Mall",
+      distance: "1.1 km",
+      imageUrl: "https://via.placeholder.com/60x60?text=Food+2",
+    },
+  ];
 
   return (
-    <div className="vol-root">
-      {/* Header */}
-      <header className="vol-header">
+    <div className="dashboard-container">
+      {/* HEADER */}
+      <div className="dashboard-header">
         <div>
-          <h1>Volunteer Dashboard</h1>
-          <p className="vol-subtitle">
+          <h2 className="dashboard-title">Volunteer Dashboard</h2>
+          <p className="dashboard-subtitle">
             Find nearby food rescues and complete pickups before food spoils.
           </p>
         </div>
-        <div className="vol-header-right">
-          <div className="vol-badge">
-            Active rescues
-            <span>{donations.length}</span>
+
+        <div style={{ display: "flex", gap: "12px" }}>
+          <div className="pill">
+            Active rescues <strong>2</strong>
           </div>
-          <div className="vol-badge secondary">
-            Radius
-            <select value={radius} onChange={(e) => setRadius(e.target.value)}>
-              <option value="3">3 km</option>
-              <option value="5">5 km</option>
-              <option value="10">10 km</option>
-            </select>
+          <div className="pill">Radius</div>
+        </div>
+      </div>
+
+      {/* LOCATION CARD */}
+      <div className="card location-card">
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <span className="location-dot"></span>
+
+          <div>
+            <p className="location-label">Your location</p>
+            <p className="location-value">Auto-detected • City Center</p>
           </div>
         </div>
-      </header>
+      </div>
 
-      <main className="vol-main">
-        {/* Current location strip */}
-        <section className="vol-location-strip">
-          <span className="dot" />
-          <div>
-            <p className="vol-location-label">Your location</p>
-            <p className="vol-location-value">Auto-detected • City Center</p>
-          </div>
-          <button className="vol-change-btn">Change</button>
-        </section>
+      {/* DONATIONS SECTION */}
+      <div className="card">
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <p className="section-title">Nearby donations</p>
+          <p className="section-subtext">Showing within 5 km radius</p>
+        </div>
 
-        {/* Nearby donations list */}
-        <section className="vol-card">
-          <div className="vol-card-header">
-            <h2>Nearby donations</h2>
-            <span className="vol-count">Showing within {radius} km radius</span>
-          </div>
+        {/* DONATION CARDS MAPPED */}
+        {donations.map((donation) => (
+          <div key={donation.id} className="donation-card">
+            <div className="donation-main-info">
+              {/* Image URL Display */}
+              <div className="donation-image-container">
+                <img
+                  src={donation.imageUrl}
+                  alt={donation.foodType}
+                  className="donation-image"
+                />
+              </div>
 
-          {donations.length === 0 ? (
-            <p className="vol-empty">
-              No donations nearby right now. You’ll get a notification when
-              something appears.
-            </p>
-          ) : (
-            <div className="vol-list">
-              {donations.map((d) => (
-                <article key={d.id} className="vol-donation-card">
-                  <div className="vol-card-top">
-                    <div>
-                      <h3>{d.donorName}</h3>
-                      <p className="vol-meta">
-                        {d.foodType} • {d.quantity}
-                      </p>
-                      <p className="vol-address">{d.address}</p>
-                    </div>
-                    <div className="vol-right-meta">
-                      <span className="pill pill-distance">{d.distance}</span>
-                      <span className="pill pill-time">
-                        Best before: {d.timeLeft}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="vol-card-bottom">
-                    <button
-                      className="btn-outline"
-                      onClick={() => handleNavigate(d)}
-                    >
-                      Navigate
-                    </button>
-                    <button
-                      className={
-                        "btn-primary" +
-                        (selected === d.id ? " btn-primary-disabled" : "")
-                      }
-                      onClick={() => handleAccept(d)}
-                      disabled={selected === d.id}
-                    >
-                      {selected === d.id ? "Accepted" : "Accept Rescue"}
-                    </button>
-                  </div>
-                </article>
-              ))}
+              <div className="donation-text-info">
+                <p className="restaurant-name">{donation.restaurantName}</p>
+                <p className="food-details">
+                  {/* foodType + quantity combined */}
+                  <strong>{donation.foodType}</strong> • {donation.quantity}
+                </p>
+                {/* address from location subdocument */}
+                <p className="food-details-address">{donation.address}</p>
+              </div>
             </div>
-          )}
-        </section>
 
-        {/* After-accept info (pickup flow hint) */}
-        {selected && (
-          <section className="vol-card vol-next-steps">
-            <h2>Next steps</h2>
-            <ol>
-              <li>Use “Navigate” to reach the donor location.</li>
-              <li>Verify food and ask the donor for the OTP code.</li>
-              <li>Enter OTP in pickup screen (next step of prototype).</li>
-              <li>Deliver to NGO / community point and mark as distributed.</li>
-            </ol>
-          </section>
-        )}
-      </main>
+            <div className="donation-row">
+              <div className="badges-row">
+                <span className="badge-distance">{donation.distance}</span>
+                {/* bestBefore field mapping */}
+                <span className="badge-time">
+                  Best before: {formatBestBefore(donation.bestBefore)}
+                </span>
+              </div>
+
+              <div style={{ display: "flex", alignItems: "center" }}>
+                {/* The input slot now represents the OTP field (for pickup) */}
+                <input
+                  type="text"
+                  placeholder="Enter OTP"
+                  className="otp-input-slot"
+                  maxLength="6"
+                />
+                {/* Status: "pending" -> Accept Rescue; "claimed" -> Pick Up */}
+                <button className="accept-btn">Accept Rescue</button>
+              </div>
+            </div>
+          </div>
+        ))}
+        {/* END DONATION CARDS */}
+      </div>
     </div>
   );
-}
+};
+
+export default VolunteerDashboard;
