@@ -1,0 +1,285 @@
+/* ---------- ROOT ---------- */
+.vol-root {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #f8fafc, #f1f5f9);
+  padding: 2rem;
+  font-family: "Inter", system-ui, sans-serif;
+  color: #0f172a;
+}
+
+/* ---------- HEADER ---------- */
+.vol-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.vol-header h1 {
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.vol-subtitle {
+  margin-top: 0.3rem;
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+.vol-header-right {
+  display: flex;
+  gap: 1rem;
+}
+
+.vol-badge {
+  background: white;
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+  border: 1px solid #e2e8f0;
+  transition: 0.2s ease;
+}
+
+.vol-badge:hover {
+  transform: translateY(-2px);
+}
+
+.vol-badge span {
+  font-weight: 600;
+}
+
+.vol-badge.secondary select {
+  border: none;
+  background: transparent;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* ---------- MAIN ---------- */
+.vol-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ---------- LOCATION STRIP ---------- */
+.vol-location-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: 1rem;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e2e8f0;
+  animation: fadeUp 0.4s ease-in-out;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55eaa;
+}
+
+.vol-change-btn {
+  margin-left: auto;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.75rem;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.vol-change-btn:hover {
+  background: #e2e8f0;
+}
+
+/* ---------- CARD ---------- */
+.vol-card {
+  background: white;
+  border-radius: 1.2rem;
+  padding: 1.3rem;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e2e8f0;
+  animation: fadeUp 0.4s ease-in-out;
+}
+
+.vol-card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.7rem;
+}
+
+.vol-card-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.vol-count {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* ---------- DONATION LIST ---------- */
+.vol-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.vol-donation-card {
+  border-radius: 1rem;
+  border: 1px solid #e2e8f0;
+  padding: 1rem;
+  background: white;
+  transition: 0.25s ease;
+  cursor: pointer;
+}
+
+.vol-donation-card:hover {
+  transform: translateY(-4px);
+  border-color: #cbd5e1;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+}
+
+/* card top */
+.vol-card-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.vol-card-top h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.vol-meta,
+.vol-address {
+  font-size: 0.85rem;
+  margin: 0.2rem 0;
+  color: #475569;
+}
+
+/* right-meta pills */
+.pill {
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.pill-distance {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.pill-time {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+/* ---------- ACTION BUTTONS ---------- */
+.vol-card-bottom {
+  margin-top: 0.8rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.btn-outline {
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  padding: 0.45rem 1rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.btn-outline:hover {
+  background: #f1f5f9;
+}
+
+.btn-primary {
+  border-radius: 999px;
+  border: none;
+  background: #16a34a;
+  color: white;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.btn-primary:hover {
+  background: #15803d;
+}
+
+.btn-primary-disabled {
+  background: #bbf7d0 !important;
+  cursor: not-allowed;
+}
+
+/* ---------- NEXT STEPS ---------- */
+.vol-next-steps {
+  animation: fadeUp 0.4s ease-in-out;
+}
+
+.vol-next-steps ol {
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 768px) {
+  .vol-root {
+    padding: 1rem;
+  }
+  .vol-header {
+    flex-direction: column;
+  }
+  .vol-header-right {
+    margin-top: 0.7rem;
+  }
+  .vol-card-top {
+    flex-direction: column;
+  }
+  .vol-card-bottom {
+    justify-content: space-between;
+  }
+}
